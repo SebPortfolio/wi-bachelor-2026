@@ -18,7 +18,7 @@ Um die Replizierbarkeit der Builds zu garantieren, wurden folgende Toolchains ve
 - **Betriebssystem:** Microsoft Windows 11 Home (Build 26200, v64-basiert)
 - **Java SDK:** Oracle OpenJDK 17.0.2 (LTS)
 - **Build-Tool:** Apache Maven 3.9.9
-- **Framework Backend:** Spring Boot 3.3.x (inkl. Spring Web, Lombok) <!-- TODO: genaue Version -->
+- **Framework Backend:** Spring Boot 3.5.16 (inkl. Spring Web, Lombok) <!-- TODO: Dependency Versionen -->
 - **Framework Frontend:** Angular 18.x.x <!-- TODO: genaue Version -->
 - **API-Spezifikation:** OpenAPI Specification x.x.x <!-- TODO: genaue Version -->
 
