@@ -1,13 +1,13 @@
-package de.htwberlin.wi.apiautomation;
+package de.htwberlin.wi.designfirst;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiAutomationApplication {
+public class DesignFirstApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiAutomationApplication.class, args);
+		SpringApplication.run(DesignFirstApplication.class, args);
 	}
 
 }

@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.htwberlin.wi</groupId>
-	<artifactId>api-automation</artifactId>
+	<artifactId>design-first-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name />
 	<description />

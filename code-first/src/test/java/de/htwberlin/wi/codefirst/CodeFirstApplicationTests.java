@@ -1,10 +1,10 @@
-package de.htwberlin.wi.apiautomation;
+package de.htwberlin.wi.codefirst;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiAutomationApplicationTests {
+class CodeFirstApplicationTests {
 
 	@Test
 	void contextLoads() {
