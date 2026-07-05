@@ -1,0 +1,130 @@
+openapi: 3.0.4
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Lokaler Entwicklungs-Server
+info:
+  contact:
+    name: Sebastian Koch
+  version: 1.0.0
+  title: WI-Bachelor-2026 - Bestandsmanagement API
+  description: Zentrale API-Spezifikation für den Design-First-Ansatz im Rahmen der Evaluation.
+  x-api-id: 48cf261a-244e-49b5-9589-c22b9dff9817
+  x-audience: component-internal
+
+tags:
+  - name: Article
+    description: Verwaltung von Artikeln
+
+paths:
+  /articles:
+    get:
+      summary: Eine Liste aller Artikel abrufen.
+      operationId: getAllArticles
+      tags:
+        - Article
+      responses:
+        "200":
+          description: Artikelliste erfolgreich geladen.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+
+  /articles/{articleId}:
+    parameters:
+      - $ref: "#/components/parameters/ArticleIdParam"
+    get:
+      summary: Die Details eines spezifischen Artikels abrufen.
+      operationId: getArticleById
+      tags:
+        - Article
+      responses:
+        "200":
+          description: Artikel erfolgreich geladen.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    ArticleIdParam:
+      name: articleId
+      description: Der eindeutige Identifikationsparameter eines Artikels.
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/ArticleId"
+
+  responses:
+    NotFound:
+      description: Die angeforderte Ressource wurde nicht gefunden.
+    InternalServerError:
+      description: Ein interner Serverfehler ist aufgetreten.
+
+  schemas:
+    ArticleId:
+      description: Die eindeutige ID eines Artikels.
+      type: integer
+      format: int64
+      example: 23
+    ArticleName:
+      description: Die Bezeichnung eines Artikels.
+      type: string
+      minLength: 1
+      maxLength: 255
+      pattern: "^[a-zäöüßA-ZÄÖÜ0-9 \\-]+$"
+      example: Weintrauben dunkel
+    Article:
+      description: Ein Artikel.
+      type: object
+      required:
+        - id
+        - name
+        - category
+        - price
+        - createdAt
+      properties:
+        id:
+          $ref: "#/components/schemas/ArticleId"
+        name:
+          $ref: "#/components/schemas/ArticleName"
+        category:
+          $ref: "#/components/schemas/ArticleCategory"
+        description:
+          description: Die Beschreibung eines Artikels.
+          type: string
+          example: 500g, abgepackt
+        price:
+          description: Der aktuelle Netto-Preis des Artikels.
+          type: number
+          format: double
+          minimum: 0
+          example: 1.49
+        createdAt:
+          description: Zeitpunkt der Artikelerstellung.
+          type: string
+          format: date-time
+          example: 2026-07-02T14:00:00.000Z
+        lastEditedAt:
+          description: Zeitpunkt der letzten Bearbeitung.
+          type: string
+          format: date-time
+
+    ArticleCategory:
+      description: Zur Klassifizierung der Artikelgruppen.
+      type: string
+      enum:
+        - OBST
+        - GEMUESE
+        - SCHOKOLADE
+        - GETRAENK
+      example: GEMUESE
