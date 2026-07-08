@@ -4,9 +4,9 @@ Dieses Repository enthält das begleitende Beispielprojekt zur Bachelorarbeit "E
 
 ## 1. Allgemeine Angaben (W-Fragen)
 
-- **Was:** Prototypische Implementierung eines Bestandsmanagements zur qualitativen und quantitativen Evaluation von API-Entwicklungsansätzen.
+- **Was:** Prototypische Implementierung eines Bestandsmanagements zur qualitativen und quantitativen Evaluation der API-Entwicklungsansätze "Design-First" und "Code-First".
 - **Wofür:** Untersuchung der Aufwandsverringerung bei API-Modifikationen durch automatisierte Toolchains.
-- **Methode:** Kontrolliertes Software-Experiment mit definierten Änderungsszenarien.
+- **Methode:** Kontrolliertes Software-Experiment mit zwei definierten Änderungsszenarien: Erweiterung des ArticleWDTO & optionaler Query-Parameter zur Filterung.
 - **Sprache:** Deutsch (Dokumentation), Englisch (Quellcode).
 - **Autor:** Sebastian Koch
 - **Lizenz:** MIT-Lizenz
@@ -19,15 +19,16 @@ Um die Replizierbarkeit der Builds zu garantieren, wurden folgende Toolchains ve
 - **Java SDK:** Oracle OpenJDK 17.0.2 (LTS)
 - **Build-Tool:** Apache Maven 3.9.9
 - **Framework Backend:** Spring Boot 3.5.16 (inkl. Spring Web, Lombok 1.18.46, MapStruct 1.6.3)
-- **Framework Frontend:** Angular 18.x.x <!-- TODO: genaue Version -->
-- **API-Spezifikation:** OpenAPI Specification 3.0.4
+- **API-Spezifikation:** OpenAPI Specification 3.0.4 (Design-First) bzw. 3.0.1 (Code-First)
+- **Codegenerierung:** OpenAPI-Generator <!-- TODO: Version -->
+- **Spezifikationsgenerierung:** SpringDoc-OpenAPI <!-- TODO: Version -->
 
 ## 3. Projektstruktur
 
 - `/design-first`: Die vertragsgetriebene Implementierung
   - `/src/main/java/de/htwberlin/wi/designfirst`: Java-Dateien zur Implementierung der Design-First-API
-    - `/article`: Domänen-Schicht für den Artikel mit Controller, Service etc.
-      - `/articleCategory`: Artikelbezogenes Enum zur Kategorisierung
+    - `/article`: Domänen-Schicht für den Artikel mit API-Controller, Service, Mapper-Interface
+      - `/articleCategory`: Artikelbezogenes Enum zur Kategorisierung inkl. Mapper-Interface
   - `/target/generated-sources`: Dateien, die während des Maven-Build generiert wurden
     - `/annotations/de/htwberlin/wi/designfirst/mapper`: Die durch MapStruct generierten Mapper-Implementierungen
     - `/openapi/src/main/java/de/htwberlin/wi/designfirst`: Die durch OpenAPI-Generator erstellten Java-Dateien zur Verwendung in der Java-Implementierung
@@ -35,3 +36,8 @@ Um die Replizierbarkeit der Builds zu garantieren, wurden folgende Toolchains ve
       - `/model`: Die WDTOs der API
 - `/code-first`: Die codegetriebene Implementierung
   - `/src/main/java/de/htwberlin/wi/codefirst`: Java-Dateien zur Implementierung der Design-First-API
+    - `/article`: Domänen-Schicht für den Artikel mit API-Controller, Service, Mapper-Interface sowie API-Interface und WDTO
+      - `/articleCategory`: Artikelbezogenes Enum zur Kategorisierung inkl. Mapper-Interface sowie WDTO
+  - `/target/generated-sources`: Dateien, die während des Maven-Build generiert wurden
+    - `/annotations/de/htwberlin/wi/codefirst/mapper`: Die durch MapStruct generierten Mapper-Implementierungen
+    - `/openapi`: Die durch SpringDoc-OpenAPI erstellte API-Spezifikation
