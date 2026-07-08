@@ -1,3 +1,6 @@
 spring:
   application:
     name: api-automation
+springdoc:
+  api-docs:
+    version: openapi_3_0
