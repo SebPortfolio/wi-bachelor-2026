@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  title: WI-Bachelor-2026 - Bestandsmanagement API
+  description: Zentrale API-Spezifikation für den Design-First-Ansatz im Rahmen der
+    Evaluation.
+  contact:
+    name: Sebastian Koch
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Lokaler Entwicklungs-Server
+tags:
+- name: Article
+  description: Verwaltung von Artikeln
+paths:
+  /api/v1/articles:
+    get:
+      tags:
+      - Article
+      summary: Eine Liste aller Artikel abrufen.
+      operationId: getAllArticles
+      responses:
+        "200":
+          description: Artikelliste erfolgreich geladen.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+              example:
+              - id: 23
+                name: Weintrauben dunkel
+                category: OBST
+                price: 1.49
+                createdAt: 2026-07-02T14:00:00Z
+        default:
+          description: Ein interner Serverfehler ist aufgetreten.
+  /api/v1/articles/{articleId}:
+    get:
+      tags:
+      - Article
+      summary: Die Details eines spezifischen Artikels abrufen.
+      operationId: getArticleById
+      parameters:
+      - name: articleId
+        in: path
+        description: Der eindeutige Identifikationsparameter eines Artikels.
+        required: true
+        schema:
+          type: string
+          default: ""
+        example: 1
+      responses:
+        "200":
+          description: Artikel erfolgreich geladen.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+              example:
+                id: 23
+                name: Weintrauben dunkel
+                category: OBST
+                price: 1.49
+                createdAt: 2026-07-02T14:00:00Z
+        "404":
+          description: Die angeforderte Ressource wurde nicht gefunden.
+        default:
+          description: Ein interner Serverfehler ist aufgetreten.
+components:
+  schemas:
+    Article:
+      required:
+      - category
+      - createdAt
+      - id
+      - name
+      - price
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Die eindeutige ID eines Artikels.
+          format: int64
+          example: 23
+        name:
+          maxLength: 255
+          minLength: 1
+          pattern: "^[a-zäöüßA-ZÄÖÜ0-9 \\-]+$"
+          type: string
+          description: Die Bezeichnung eines Artikels.
+          example: Weintrauben dunkel
+          default: ""
+        category:
+          type: string
+          description: Zur Klassifizierung von Artikeln.
+          example: OBST
+          default: ""
+          enum:
+          - OBST
+          - GEMUESE
+          - SCHOKOLADE
+          - GETRAENK
+        description:
+          type: string
+          description: Die Beschreibung eines Artikels.
+          nullable: true
+          example: "500g, abgepackt"
+          default: ""
+        price:
+          minimum: 0
+          exclusiveMinimum: false
+          type: number
+          description: Der aktuelle Netto-Preis des Artikels.
+          format: double
+          example: 1.49
+        createdAt:
+          type: string
+          description: Zeitpunkt der Artikelerstellung.
+          format: date-time
+          example: 2026-07-02T14:00:00Z
+        lastEditedAt:
+          type: string
+          description: Zeitpunkt der letzten Bearbeitung.
+          format: date-time
+          nullable: true
+      description: Ein Artikel.
+      default: null
+x-api-id: 369dc1b6-42d2-443b-b5b4-bd173cb6103e
+x-audience: component-internal
