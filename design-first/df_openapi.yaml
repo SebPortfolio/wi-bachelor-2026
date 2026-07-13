@@ -63,6 +63,7 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/ArticleId"
+      example: 1
 
   responses:
     NotFound:
