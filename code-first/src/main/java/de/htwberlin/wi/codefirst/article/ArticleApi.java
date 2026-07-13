@@ -26,7 +26,7 @@ public interface ArticleApi {
         @Operation(operationId = "getAllArticles", summary = "Eine Liste aller Artikel abrufen.", tags = {
                         "Article" }, responses = {
                                         @ApiResponse(responseCode = "200", description = "Artikelliste erfolgreich geladen.", content = {
-                                                        @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArticleWdto.class)))
+                                                        @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArticleWdto.class)), examples = @ExampleObject(value = "[{\"id\": 23, \"name\": \"Weintrauben dunkel\", \"category\": \"OBST\", \"price\": 1.49, \"createdAt\": \"2026-07-02T14:00:00Z\"}]"))
                                         }),
                                         @ApiResponse(responseCode = "default", description = "Ein interner Serverfehler ist aufgetreten.", content = @Content(schema = @Schema(hidden = true)))
                         })
@@ -39,7 +39,7 @@ public interface ArticleApi {
         @Operation(operationId = "getArticleById", summary = "Die Details eines spezifischen Artikels abrufen.", tags = {
                         "Article" }, responses = {
                                         @ApiResponse(responseCode = "200", description = "Artikel erfolgreich geladen.", content = {
-                                                        @Content(mediaType = "application/json", schema = @Schema(implementation = ArticleWdto.class), examples = @ExampleObject(name = "StandardArtikel", summary = "Ein ganz normales Artikel-Beispiel", value = "{\"id\": 23, \"name\": \"Weintrauben dunkel\", \"category\": \"OBST\", \"price\": 1.49, \"createdAt\": \"2026-07-02T14:00:00Z\"}"))
+                                                        @Content(mediaType = "application/json", schema = @Schema(implementation = ArticleWdto.class), examples = @ExampleObject(value = "{\"id\": 23, \"name\": \"Weintrauben dunkel\", \"category\": \"OBST\", \"price\": 1.49, \"createdAt\": \"2026-07-02T14:00:00Z\"}"))
                                         }),
                                         @ApiResponse(responseCode = "404", description = "Die angeforderte Ressource wurde nicht gefunden.", content = @Content(schema = @Schema(hidden = true))),
                                         @ApiResponse(responseCode = "default", description = "Ein interner Serverfehler ist aufgetreten.", content = @Content(schema = @Schema(hidden = true)))
