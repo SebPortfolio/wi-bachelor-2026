@@ -1,6 +1,6 @@
 openapi: 3.0.4
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:8080
     description: Lokaler Entwicklungs-Server
 info:
   contact:
@@ -16,7 +16,7 @@ tags:
     description: Verwaltung von Artikeln
 
 paths:
-  /articles:
+  /api/v1/articles:
     get:
       summary: Eine Liste aller Artikel abrufen.
       operationId: getAllArticles
@@ -34,7 +34,7 @@ paths:
         default:
           $ref: "#/components/responses/InternalServerError"
 
-  /articles/{articleId}:
+  /api/v1/articles/{articleId}:
     parameters:
       - $ref: "#/components/parameters/ArticleIdParam"
     get:
