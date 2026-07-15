@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,12 @@ public class ArticleService {
 
         public List<Article> getAllArticles() {
                 return this.allArticles;
+        }
+
+        public List<Article> getArticlesFilteredByCategory(ArticleCategory category) {
+                return this.allArticles
+                                .stream().filter(article -> article.getCategory().equals(category))
+                                .collect(Collectors.toList());
         }
 
         public Article getArticleById(Long id) {

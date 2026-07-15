@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import de.htwberlin.wi.designfirst.article.articlecategory.ArticleCategoryMapper;
 import de.htwberlin.wi.designfirst.model.ArticleWdto;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { ArticleCategoryMapper.class })
 public interface ArticleMapper {
     ArticleWdto toWdto(Article article);
 
