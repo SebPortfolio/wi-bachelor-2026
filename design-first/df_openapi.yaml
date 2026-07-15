@@ -22,6 +22,12 @@ paths:
       operationId: getAllArticles
       tags:
         - Article
+      parameters:
+        - name: category
+          description: Filterung des Listenergebnisses nach Kategorie des Artikels
+          in: query
+          schema:
+            $ref: "#/components/schemas/ArticleCategory"
       responses:
         "200":
           description: Artikelliste erfolgreich geladen.
