@@ -5,7 +5,7 @@ servers:
 info:
   contact:
     name: Sebastian Koch
-  version: 1.0.0
+  version: 1.1.0
   title: WI-Bachelor-2026 - Bestandsmanagement API
   description: Zentrale API-Spezifikation für den Design-First-Ansatz im Rahmen der Evaluation.
   x-api-id: 48cf261a-244e-49b5-9589-c22b9dff9817
