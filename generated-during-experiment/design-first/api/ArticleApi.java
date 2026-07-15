@@ -5,7 +5,9 @@
  */
 package de.htwberlin.wi.designfirst.api;
 
+import de.htwberlin.wi.designfirst.model.ArticleCategoryWdto;
 import de.htwberlin.wi.designfirst.model.ArticleWdto;
+import org.springframework.lang.Nullable;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -30,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-07-13T16:23:59.363144200+02:00[Europe/Berlin]", comments = "Generator version: 7.23.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-07-15T10:20:52.010835600+02:00[Europe/Berlin]", comments = "Generator version: 7.23.0")
 @Validated
 @Tag(name = "Article", description = "Verwaltung von Artikeln")
 public interface ArticleApi {
@@ -39,6 +41,7 @@ public interface ArticleApi {
     /**
      * GET /api/v1/articles : Eine Liste aller Artikel abrufen.
      *
+     * @param category Filterung des Listenergebnisses nach Kategorie des Artikels (optional)
      * @return Artikelliste erfolgreich geladen. (status code 200)
      *         or Ein interner Serverfehler ist aufgetreten. (status code 200)
      */
@@ -59,7 +62,7 @@ public interface ArticleApi {
         produces = { "application/json" }
     )
     ResponseEntity<List<ArticleWdto>> getAllArticles(
-        
+        @Parameter(name = "category", description = "Filterung des Listenergebnisses nach Kategorie des Artikels", in = ParameterIn.QUERY) @Valid @RequestParam(value = "category", required = false) @Nullable ArticleCategoryWdto category
     );
 
 
