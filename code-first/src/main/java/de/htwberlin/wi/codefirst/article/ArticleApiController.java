@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.htwberlin.wi.codefirst.article.articlecategory.ArticleCategory;
+import de.htwberlin.wi.codefirst.article.articlecategory.ArticleCategoryMapper;
+import de.htwberlin.wi.codefirst.article.articlecategory.ArticleCategoryWdto;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -13,10 +16,17 @@ public class ArticleApiController implements ArticleApi {
 
         private final ArticleService articleService;
         private final ArticleMapper articleMapper;
+        private final ArticleCategoryMapper articleCategoryMapper;
 
         @Override
-        public ResponseEntity<List<ArticleWdto>> getAllArticles() {
-                List<Article> articles = this.articleService.getAllArticles();
+        public ResponseEntity<List<ArticleWdto>> getAllArticles(ArticleCategoryWdto category) {
+                final List<Article> articles;
+                if (category == null) {
+                        articles = this.articleService.getAllArticles();
+                } else {
+                        ArticleCategory mappedCategory = this.articleCategoryMapper.fromWdto(category);
+                        articles = this.articleService.getArticlesFilteredByCategory(mappedCategory);
+                }
 
                 List<ArticleWdto> wdtos = this.articleMapper.toWdtoList(articles);
                 return ResponseEntity.ok(wdtos);
