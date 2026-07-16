@@ -7,7 +7,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import de.htwberlin.wi.codefirst.article.articlecategory.ArticleCategoryWdto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -17,6 +19,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
 
 @Validated
 @Tag(name = "Article", description = "Verwaltung von Artikeln")
@@ -32,7 +36,8 @@ public interface ArticleApi {
                         })
         @RequestMapping(method = RequestMethod.GET, value = ArticleApi.PATH_GET_ALL_ARTICLES, produces = {
                         "application/json" })
-        public ResponseEntity<List<ArticleWdto>> getAllArticles();
+        public ResponseEntity<List<ArticleWdto>> getAllArticles(
+                        @Parameter(name = "category", description = "Filterung des Listenergebnisses nach Kategorie des Artikels", in = ParameterIn.QUERY, schema = @Schema(implementation = ArticleCategoryWdto.class)) @Valid @RequestParam(value = "category", required = false) @Nullable ArticleCategoryWdto category);
 
         String PATH_GET_ARTICLE_BY_ID = "/api/v1/articles/{articleId}";
 
