@@ -19,6 +19,21 @@ paths:
       - Article
       summary: Eine Liste aller Artikel abrufen.
       operationId: getAllArticles
+      parameters:
+      - name: category
+        in: query
+        description: Filterung des Listenergebnisses nach Kategorie des Artikels
+        required: false
+        schema:
+          type: string
+          description: Zur Klassifizierung von Artikeln.
+          example: OBST
+          default: ""
+          enum:
+          - OBST
+          - GEMUESE
+          - SCHOKOLADE
+          - GETRAENK
       responses:
         "200":
           description: Artikelliste erfolgreich geladen.
