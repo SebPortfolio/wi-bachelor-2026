@@ -14,6 +14,7 @@ public class ArticleApiController implements ArticleApi {
         private final ArticleService articleService;
         private final ArticleMapper articleMapper;
 
+        @Override
         public ResponseEntity<List<ArticleWdto>> getAllArticles() {
                 List<Article> articles = this.articleService.getAllArticles();
 
@@ -21,6 +22,7 @@ public class ArticleApiController implements ArticleApi {
                 return ResponseEntity.ok(wdtos);
         }
 
+        @Override
         public ResponseEntity<ArticleWdto> getArticleById(Long articleId) {
                 Article article = this.articleService.getArticleById(articleId);
 
