@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import de.htwberlin.wi.designfirst.model.ArticleCategoryWdto;
+import de.htwberlin.wi.designfirst.model.MoneyWdto;
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
@@ -27,7 +28,7 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Article", description = "Ein Artikel.")
 @JsonTypeName("Article")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-07-13T16:23:59.363144200+02:00[Europe/Berlin]", comments = "Generator version: 7.23.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-07-17T10:04:52.491744500+02:00[Europe/Berlin]", comments = "Generator version: 7.23.0")
 public class ArticleWdto implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -40,7 +41,7 @@ public class ArticleWdto implements Serializable {
 
   private @Nullable String description;
 
-  private Double price;
+  private MoneyWdto price;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
@@ -55,7 +56,7 @@ public class ArticleWdto implements Serializable {
   /**
    * Constructor with only required parameters
    */
-  public ArticleWdto(Long id, String name, ArticleCategoryWdto category, Double price, OffsetDateTime createdAt) {
+  public ArticleWdto(Long id, String name, ArticleCategoryWdto category, MoneyWdto price, OffsetDateTime createdAt) {
     this.id = id;
     this.name = name;
     this.category = category;
@@ -147,25 +148,24 @@ public class ArticleWdto implements Serializable {
     this.description = description;
   }
 
-  public ArticleWdto price(Double price) {
+  public ArticleWdto price(MoneyWdto price) {
     this.price = price;
     return this;
   }
 
   /**
-   * Der aktuelle Netto-Preis des Artikels.
-   * minimum: 0
+   * Get price
    * @return price
    */
-  @NotNull @DecimalMin(value = "0") 
-  @Schema(name = "price", example = "1.49", description = "Der aktuelle Netto-Preis des Artikels.", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "price", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("price")
-  public Double getPrice() {
+  public MoneyWdto getPrice() {
     return price;
   }
 
   @JsonProperty("price")
-  public void setPrice(Double price) {
+  public void setPrice(MoneyWdto price) {
     this.price = price;
   }
 
