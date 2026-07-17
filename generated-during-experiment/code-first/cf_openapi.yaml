@@ -25,15 +25,7 @@ paths:
         description: Filterung des Listenergebnisses nach Kategorie des Artikels
         required: false
         schema:
-          type: string
-          description: Zur Klassifizierung von Artikeln.
-          example: OBST
-          default: ""
-          enum:
-          - OBST
-          - GEMUESE
-          - SCHOKOLADE
-          - GETRAENK
+          $ref: "#/components/schemas/ArticleCategory"
       responses:
         "200":
           description: Artikelliste erfolgreich geladen.
@@ -108,15 +100,7 @@ components:
           example: Weintrauben dunkel
           default: ""
         category:
-          type: string
-          description: Zur Klassifizierung von Artikeln.
-          example: OBST
-          default: ""
-          enum:
-          - OBST
-          - GEMUESE
-          - SCHOKOLADE
-          - GETRAENK
+          $ref: "#/components/schemas/ArticleCategory"
         description:
           type: string
           description: Die Beschreibung eines Artikels.
@@ -142,5 +126,15 @@ components:
           nullable: true
       description: Ein Artikel.
       default: null
+    ArticleCategory:
+      type: string
+      description: Zur Klassifizierung von Artikeln.
+      example: OBST
+      default: ""
+      enum:
+      - OBST
+      - GEMUESE
+      - SCHOKOLADE
+      - GETRAENK
 x-api-id: 369dc1b6-42d2-443b-b5b4-bd173cb6103e
 x-audience: component-internal

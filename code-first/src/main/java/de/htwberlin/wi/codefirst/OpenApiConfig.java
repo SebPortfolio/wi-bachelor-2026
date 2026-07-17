@@ -31,4 +31,8 @@ public class OpenApiConfig {
                                                 "x-api-id", "369dc1b6-42d2-443b-b5b4-bd173cb6103e",
                                                 "x-audience", "component-internal"));
         }
+
+        static {
+                io.swagger.v3.core.jackson.ModelResolver.enumsAsRef = true;
+        }
 }
