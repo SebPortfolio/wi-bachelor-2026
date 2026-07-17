@@ -112,10 +112,7 @@ components:
           example: 500g, abgepackt
         price:
           description: Der aktuelle Netto-Preis des Artikels.
-          type: number
-          format: double
-          minimum: 0
-          example: 1.49
+          $ref: "#/components/schemas/Money"
         createdAt:
           description: Zeitpunkt der Artikelerstellung.
           type: string
@@ -135,3 +132,27 @@ components:
         - SCHOKOLADE
         - GETRAENK
       example: OBST
+
+    Money:
+      type: object
+      description: Geld-Objekt zur Repräsentation eines Preises in verschiedenen Währungen.
+      properties:
+        amount:
+          type: number
+          description: >
+            Der Betrag beschreibt die Haupt- und Untereinheit der Währung in einem einzigen Wert,
+            wobei der ganzzahlige Teil (die Ziffern vor dem Dezimalpunkt) für die
+            Haupteinheit und der Nachkommateil (die Ziffern nach dem Dezimalpunkt) für
+            die Untereinheit steht.
+          format: decimal
+          minimum: 0.0
+          example: 1.49
+        currency:
+          type: string
+          description: Der 3 Zeichen lange Buchstabencode der Währung, wie er durch ISO-4217 definiert ist.
+          format: iso-4217
+          pattern: "^[A-Z]{3}$"
+          example: EUR
+      required:
+        - amount
+        - currency
