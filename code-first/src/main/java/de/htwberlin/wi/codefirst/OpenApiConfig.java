@@ -20,7 +20,7 @@ public class OpenApiConfig {
                                                 .contact(new Contact()
                                                                 .name("Sebastian Koch"))
                                                 .title("WI-Bachelor-2026 - Bestandsmanagement API")
-                                                .version("1.1.0")
+                                                .version("2.0.0")
                                                 .description(
                                                                 "Zentrale API-Spezifikation für den Design-First-Ansatz im Rahmen der Evaluation."))
                                 .servers(List.of(
