@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import de.htwberlin.wi.codefirst.article.articlecategory.ArticleCategoryWdto;
+import de.htwberlin.wi.codefirst.article.money.MoneyWdto;
+
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
@@ -27,7 +29,7 @@ public class ArticleWdto implements Serializable {
 
     private @Nullable String description;
 
-    private Double price;
+    private MoneyWdto price;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime createdAt;
@@ -42,7 +44,7 @@ public class ArticleWdto implements Serializable {
     /**
      * Constructor with only required parameters
      */
-    public ArticleWdto(Long id, String name, ArticleCategoryWdto category, Double price, OffsetDateTime createdAt) {
+    public ArticleWdto(Long id, String name, ArticleCategoryWdto category, MoneyWdto price, OffsetDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -141,7 +143,7 @@ public class ArticleWdto implements Serializable {
         this.description = description;
     }
 
-    public ArticleWdto price(Double price) {
+    public ArticleWdto price(MoneyWdto price) {
         this.price = price;
         return this;
     }
@@ -154,14 +156,14 @@ public class ArticleWdto implements Serializable {
      */
     @NotNull
     @DecimalMin(value = "0")
-    @Schema(name = "price", example = "1.49", description = "Der aktuelle Netto-Preis des Artikels.", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(name = "price", description = "Der aktuelle Netto-Preis des Artikels.", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("price")
-    public Double getPrice() {
+    public MoneyWdto getPrice() {
         return price;
     }
 
     @JsonProperty("price")
-    public void setPrice(Double price) {
+    public void setPrice(MoneyWdto price) {
         this.price = price;
     }
 
