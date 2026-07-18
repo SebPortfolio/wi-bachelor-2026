@@ -39,7 +39,9 @@ paths:
               - id: 23
                 name: Weintrauben dunkel
                 category: OBST
-                price: 1.49
+                price:
+                  amount: 1.49
+                  currency: EUR
                 createdAt: 2026-07-02T14:00:00Z
         default:
           description: Ein interner Serverfehler ist aufgetreten.
@@ -69,7 +71,9 @@ paths:
                 id: 23
                 name: Weintrauben dunkel
                 category: OBST
-                price: 1.49
+                price:
+                  amount: 1.49
+                  currency: EUR
                 createdAt: 2026-07-02T14:00:00Z
         "404":
           description: Die angeforderte Ressource wurde nicht gefunden.
@@ -108,12 +112,7 @@ components:
           example: "500g, abgepackt"
           default: ""
         price:
-          minimum: 0
-          exclusiveMinimum: false
-          type: number
-          description: Der aktuelle Netto-Preis des Artikels.
-          format: double
-          example: 1.49
+          $ref: "#/components/schemas/Money"
         createdAt:
           type: string
           description: Zeitpunkt der Artikelerstellung.
@@ -136,5 +135,31 @@ components:
       - GEMUESE
       - SCHOKOLADE
       - GETRAENK
+    Money:
+      required:
+      - amount
+      - currency
+      type: object
+      properties:
+        amount:
+          minimum: 0.0
+          exclusiveMinimum: false
+          type: number
+          description: "Der Betrag beschreibt die Haupt- und Untereinheit der Währung\
+            \ in einem einzigen Wert, wobei der ganzzahlige Teil (die Ziffern vor\
+            \ dem Dezimalpunkt) für die Haupteinheit und der Nachkommateil (die Ziffern\
+            \ nach dem Dezimalpunkt) für die Untereinheit steht. "
+          format: decimal
+          example: 1.49
+        currency:
+          pattern: "^[A-Z]{3}$"
+          type: string
+          description: "Der 3 Zeichen lange Buchstabencode der Währung, wie er durch\
+            \ ISO-4217 definiert ist."
+          format: iso-4217
+          example: EUR
+          default: ""
+      description: Geld-Objekt zur Repräsentation eines Preises in verschiedenen Währungen.
+      default: null
 x-api-id: 369dc1b6-42d2-443b-b5b4-bd173cb6103e
 x-audience: component-internal
